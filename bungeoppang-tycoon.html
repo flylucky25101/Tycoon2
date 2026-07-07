@@ -70,6 +70,11 @@ body{
 .since{z-index:2;background:#fff;color:#c98a3e;font-size:13px;letter-spacing:3px;
   border-radius:99px;padding:4px 16px;box-shadow:0 3px 0 rgba(180,120,50,.35);margin:6px 0 10px}
 #titleBtns{z-index:2;display:flex;flex-direction:column;gap:12px}
+.title-teaser{z-index:2;font-size:10.5px;color:#b07a45;opacity:.8;margin-top:11px;letter-spacing:.2px;
+  background:rgba(255,255,255,.5);border-radius:99px;padding:3px 12px;box-shadow:0 2px 0 rgba(200,150,90,.2)}
+.title-teaser b{color:#e0864a}
+.title-teaser .th{color:#f66d8a;display:inline-block;animation:teaseHeart 1.8s ease-in-out infinite}
+@keyframes teaseHeart{0%,100%{transform:scale(1)}50%{transform:scale(1.35)}}
 #titleCrowd{position:absolute;bottom:-6px;left:0;right:0;z-index:2;display:flex;justify-content:center;align-items:flex-end;gap:-10px;pointer-events:none}
 #titleCrowd svg{width:88px;height:auto;margin:0 -10px;filter:drop-shadow(0 6px 8px rgba(120,60,10,.3))}
 #titleCrowd svg:nth-child(2n){transform:translateY(14px) scale(.92)}
@@ -191,9 +196,12 @@ body{
 }
 .bubble::after{content:"";position:absolute;bottom:-9px;left:50%;transform:translateX(-50%);
   border:8px solid transparent;border-top-color:#ffcf8a;border-bottom:none}
-.bubble .order-line{display:flex;align-items:center;justify-content:center;gap:5px;font-size:18px;color:var(--ink);line-height:1.1}
+.bubble .order-line{display:flex;align-items:center;justify-content:center;gap:4px;font-size:18px;color:var(--ink);line-height:1.1}
 .bubble .order-line svg{width:38px;height:24px}
+.bubble .order-line .nmlabel{font-size:14px;color:var(--ink)}
 .bubble .order-line .cnt{font-size:22px;color:#e0562f;font-weight:400}
+.bubble .say{font-size:15px;color:#6b8f3a;white-space:nowrap;padding:3px 4px 2px;line-height:1.1}
+.bubble .say.bad{color:#e0562f}
 .bubble .order-line .done-part{opacity:.3;text-decoration:line-through}
 .patience{height:6px;border-radius:4px;background:#f0e4d0;margin-top:4px;overflow:hidden;border:1px solid #e5d2b5}
 .patience i{display:block;height:100%;border-radius:4px;background:var(--ok);transition:width .3s linear}
@@ -290,22 +298,33 @@ body{
   border-top:5px solid #fff;padding:9px 10px calc(env(safe-area-inset-bottom,0px) + 10px);
   box-shadow:0 -6px 18px rgba(140,80,20,.3);
 }
-/* 완성 붕어빵 거치대 (화덕 위) */
-#trayRack{position:relative;width:100%;margin:0 auto 8px;min-height:52px;
-  display:flex;align-items:flex-end;justify-content:center}
-#trayRack .rack-shelf{position:absolute;left:4%;right:4%;bottom:0;height:13px;border-radius:7px;z-index:0;
-  background:linear-gradient(180deg,#eeb26a,#c9853e);border:2px solid #fff;
-  box-shadow:0 5px 10px rgba(120,60,20,.4),inset 0 2px 0 rgba(255,255,255,.5)}
-#tray{display:flex;gap:4px;justify-content:center;overflow-x:auto;scrollbar-width:none;
-  padding:0 10px 9px;max-width:100%;position:relative;z-index:1}
+/* 완성 붕어빵 진열대 (화덕 위) — 카툰 나무 트레이 */
+#trayRack{position:relative;width:100%;margin:0 auto 8px;display:flex;justify-content:center;padding:0 6px}
+#trayCase{position:relative;max-width:100%;
+  background:linear-gradient(180deg,#f7cd90 0%,#e6a659 55%,#cd8b41 100%);
+  border:3px solid #fff;border-radius:18px;
+  box-shadow:0 6px 0 #a5641f,0 11px 16px rgba(120,60,20,.35),inset 0 3px 0 rgba(255,255,255,.5),inset 0 -7px 12px rgba(120,60,20,.28);
+  padding:7px 10px 9px}
+#trayCase::before{content:"완성";position:absolute;top:-11px;left:14px;z-index:2;
+  background:#fff;color:#e07a2a;font-size:11px;border:2px solid #ffcf8a;border-radius:99px;padding:1px 10px;
+  box-shadow:0 3px 6px rgba(120,60,10,.25)}
+#tray{display:flex;align-items:flex-end;justify-content:flex-start;overflow-x:auto;scrollbar-width:none;
+  max-width:100%;min-height:40px}
 #tray::-webkit-scrollbar{display:none}
-.tray-item{display:flex;flex-direction:column;align-items:center;flex:0 0 auto;
-  transition:transform .15s;filter:drop-shadow(0 4px 4px rgba(120,60,10,.3))}
-.tray-item.bump{transform:translateY(-5px) scale(1.12)}
-.tray-item .ficon{width:48px;height:31px}
-.tray-item .tcnt{font-size:12px;color:#7a4a1e;background:#fff;border:1.5px solid #ffd9a0;
-  border-radius:99px;padding:0 7px;margin-top:-5px;box-shadow:0 2px 0 rgba(200,140,60,.4)}
-.tray-empty{color:#8a5a2e;font-size:13px;padding:8px 2px;opacity:.85}
+.tray-group{display:flex;flex-direction:column;align-items:center;flex:0 0 auto;padding:0 8px;position:relative}
+.tray-group + .tray-group::before{content:"";position:absolute;left:0;top:2px;bottom:2px;width:3px;border-radius:3px;
+  background:rgba(255,255,255,.85);box-shadow:0 0 0 1px rgba(160,100,40,.25)}   /* 맛 사이 분리막 */
+.tray-group .tname{font-size:11px;border-radius:99px;padding:1px 9px;margin-bottom:2px;white-space:nowrap;border:1.5px solid rgba(255,255,255,.9);
+  box-shadow:0 2px 0 rgba(120,60,20,.3),inset 0 1px 0 rgba(255,255,255,.35)}
+.tstack{display:flex;align-items:flex-end;padding-left:16px}   /* 겹침 시작 여백 */
+.tstack .tfish{display:block;width:40px;margin-left:-16px;transition:transform .15s;
+  filter:drop-shadow(-2px 3px 2px rgba(120,60,10,.3))}
+.tstack .tfish:first-child{margin-left:0}
+.tstack .tfish img,.tstack .tfish svg{width:100%;height:auto;display:block}
+.tstack .tfish.bump{transform:translateY(-6px) scale(1.08)}
+.tstack .tmore{align-self:center;font-size:12px;color:#7a4a1e;background:#fff;border:1.5px solid #ffd9a0;
+  border-radius:99px;padding:0 6px;margin-left:4px}
+.tray-empty{color:#8a5a2e;font-size:13px;padding:8px 6px;opacity:.9}
 #fillingBar{display:flex;gap:8px}
 .fill-btn{
   flex:1;border:3px solid #fff;border-radius:16px;padding:7px 4px 6px;cursor:pointer;font-family:inherit;
@@ -494,6 +513,7 @@ body{
       <button class="btn" id="btnNew">새로 시작</button>
       <button class="btn secondary hidden" id="btnContinue">이어하기</button>
     </div>
+    <div class="title-teaser">🐙 흥행하면 <b>타코야키 타이쿤</b>도 만들게요 <span class="th">♡</span> 잘 부탁해요</div>
     <div id="titleCrowd"></div>
   </div>
 
@@ -522,7 +542,7 @@ body{
     <div id="dayBarWrap"><div id="dayBar"></div></div>
     <div id="street"></div>
     <div id="grillWrap">
-      <div id="trayRack"><div class="rack-shelf"></div><div id="tray"></div></div>
+      <div id="trayRack"><div id="trayCase"><div id="tray"></div></div></div>
       <div id="comboFx" class="hidden"><div class="ctxt">COMBO</div><div class="cnum">x2</div></div>
       <div id="petCat"></div><div id="mixerBox"></div><div id="grill"></div>
     </div>
@@ -702,18 +722,12 @@ function ensureSizzle(){
   sizz={g};
 }
 function setSizzle(n){
-  // 사용자 sizzle.mp3 가 있으면 그것으로 대체
+  // 합성 '치익' 지글지글음은 제거(거슬린다는 피드백). 단, 사용자가 sizzle.mp3를 넣으면 그건 재생.
   if(SND.sizzle){
     const a=SND.sizzle;
     if(muted||n<=0){ if(!a.paused)a.pause(); }
     else{ a.volume=Math.min(.6,n*.14); if(a.paused)a.play().catch(()=>{}); }
-    return;
   }
-  if(!AC)return;
-  if(n>0&&!muted)ensureSizzle();
-  if(!sizz)return;
-  const target=muted?0:Math.min(.05,n*.012);
-  sizz.g.gain.linearRampToValueAtTime(target,AC.currentTime+.2);
 }
 
 /* ---------- 게임 데이터 ---------- */
@@ -796,16 +810,22 @@ function fishIcon(key){
   return miniFish(f.color);
 }
 function paintFish(m,color,goldT,burnT){
-  // 한 틀에 붕어빵 1마리만 — 겹침 없이 단계별로 한 장만 표시
+  // 한 틀에 붕어빵 1마리만 — 단계가 바뀔 때만 DOM 갱신(성능)
   if(IMG.fish&&m.imgGold){
     const show = burnT>=.5?"burnt":(goldT>=.5?"gold":"raw");
+    if(m.shownStage===show)return;
+    m.shownStage=show;
     if(m.imgRaw)m.imgRaw.style.opacity = show==="raw"?1:0;
     m.imgGold.style.opacity = show==="gold"?1:0;
     m.imgBurnt.style.opacity = show==="burnt"?1:0;
     return;
   }
+  // SVG 폴백: 색이 눈에 띄게 바뀔 때만 갱신
+  const cc=Math.round(clamp(goldT*.6+burnT,0,2)*20);
+  if(m.shownColor===cc)return; m.shownColor=cc;
   setFishColor(m,color);
 }
+function setBar(m,pct){ pct=Math.round(pct); if(m.barPct!==pct){ m.barPct=pct; m.bar.style.width=pct+"%"; } }
 
 /* ---------- 성장/콤보/피버 시스템 ---------- */
 const TITLES=[[1,"견습 굽사"],[3,"동네 굽사"],[5,"골목 명인"],[8,"거리의 스타"],[12,"붕어빵 장인"],[16,"전설의 타이쿤"]];
@@ -1156,8 +1176,8 @@ function buildGrill(){
       '<div class="tag"></div>'+
       '<div class="fish-wrap"></div>'+
       '<div class="fillCut"></div>'+
-      '<div class="steam"><i></i><i></i><i></i></div>'+
-      '<div class="smoke"><i></i><i></i><i></i></div>'+
+      '<div class="steam"><i></i><i></i></div>'+
+      '<div class="smoke"><i></i><i></i></div>'+
       '<div class="prog"><i></i></div>';
     g.appendChild(el);
     const m={el,state:"empty",t:0,fill:null,
@@ -1172,6 +1192,7 @@ function renderMoldEmpty(m){
   m.wrap.innerHTML=fishSVG("rgba(255,255,255,.05)","fish",false);
   m.el.className="mold";
   m.tag.textContent="";
+  m.shownStage=null; m.shownColor=null; m.barPct=null;
 }
 /* 속(팥/슈크림 등) 단면 질감 — 아이콘·화덕 공용
    assets/fill_<맛>.png 가 있으면 그 이미지를 속으로 사용, 없으면 아래 CSS 질감 */
@@ -1237,6 +1258,7 @@ function tapMold(m){
     m.state="cookA"; m.t=0; m.fill=selFill; m.filled=false;
     if(IMG.fish){ m.wrap.innerHTML=fishImgStack(); m.imgRaw=m.wrap.querySelector(".raw"); m.imgGold=m.wrap.querySelector(".gold"); m.imgBurnt=m.wrap.querySelector(".burnt"); }
     else { m.wrap.innerHTML=fishSVG(COL_RAW); m.imgRaw=null; m.imgGold=null; }
+    m.shownStage=null; m.shownColor=null; m.barPct=null;
     m.el.classList.add("cooking","steaming","fill-attn");
     m.tag.textContent="속 넣기!";
     SFX.pour(); vibrate(12);
@@ -1366,7 +1388,7 @@ function updateMold(m,dt){
   if(m.state==="cookA"){
     const p=clamp(m.t/cookA(),0,1);
     paintFish(m,lerpColor(COL_RAW,COL_GOLD,p*.55),p*.55,0);
-    m.bar.style.width=(p*50)+"%";
+    setBar(m,p*50);
     if(p>=1){
       if(m.filled){ m.state="flipWait"; m.t=0; m.el.classList.add("attn"); m.tag.textContent="뒤집기!"; SFX.tick(); }
       else{ m.state="fillWait"; m.t=0; m.el.classList.remove("fill-attn"); m.el.classList.add("attn"); m.tag.textContent="속 넣기!"; SFX.tick(); }
@@ -1385,7 +1407,7 @@ function updateMold(m,dt){
   else if(m.state==="cookB"){
     const p=clamp(m.t/cookB(),0,1);
     paintFish(m,lerpColor(COL_RAW,COL_GOLD,.45+p*.55),.45+p*.55,0);
-    m.bar.style.width=(50+p*50)+"%";
+    setBar(m,50+p*50);
     if(p>=1){ m.state="done"; m.t=0; m.el.classList.add("attn"); m.tag.textContent="완성!"; sparkAt(m.el); SFX.bell(); }
   }
   else if(m.state==="done"){
@@ -1416,20 +1438,28 @@ function sparkAt(el){
 }
 
 /* ---------- 쟁반 ---------- */
+function trayFish(){ return IMG.fish ? '<img src="'+IMG.fishGold+'" alt="">' : miniFish("#e8a53f"); }
+function labelTextColor(hex){ const p=h=>parseInt(hex.slice(h,h+2),16); const lum=0.299*p(1)+0.587*p(3)+0.114*p(5); return lum>150?"#5a3a22":"#fff"; }
 function renderTray(bumpKey){
   const t=$("#tray");
+  const CAP=10;
   let html="",any=false;
   for(const k of FILL_KEYS){
     const n=day.tray[k]||0;
-    if(n>0){
-      any=true;
-      html+='<div class="tray-item" data-k="'+k+'">'+fishIcon(k)+'<b class="tcnt">×'+n+'</b></div>';
-    }
+    if(n<=0)continue;
+    any=true;
+    const show=Math.min(n,CAP);
+    let fishes="";
+    for(let i=0;i<show;i++)fishes+='<span class="tfish" style="z-index:'+i+'">'+trayFish()+'</span>';
+    const more=n>CAP?'<span class="tmore">+'+(n-CAP)+'</span>':'';
+    html+='<div class="tray-group" data-k="'+k+'">'+
+      '<span class="tname" style="background:'+FILLINGS[k].color+';color:'+labelTextColor(FILLINGS[k].color)+'">'+FILLINGS[k].name+'</span>'+
+      '<div class="tstack">'+fishes+more+'</div></div>';
   }
-  t.innerHTML=any?html:'<span class="tray-empty">완성된 붕어빵이 여기 담겨요</span>';
+  t.innerHTML=any?html:'<span class="tray-empty">완성된 붕어빵이 여기 진열돼요</span>';
   if(bumpKey){
-    const el=t.querySelector('[data-k="'+bumpKey+'"]');
-    if(el){el.classList.add("bump");setTimeout(()=>el.classList.remove("bump"),160)}
+    const st=t.querySelector('.tray-group[data-k="'+bumpKey+'"] .tstack');
+    if(st){ const last=st.querySelector('.tfish:last-of-type'); if(last){last.classList.add("bump");setTimeout(()=>last.classList.remove("bump"),200);} }
   }
 }
 
@@ -1527,12 +1557,33 @@ function spawnCustomer(){
   else if(pk==="vip"){ toast("⭐ VIP 손님! 잘 대접하면 큰 팁!",2600); }
   setTimeout(()=>c.el.classList.remove("enter"),520);
 }
+/* 손님 대사 */
+const CUST_LINES={
+  happy:{
+    normal:["잘 먹을게요!","맛있겠다~","고마워요, 또 올게요!","붕어빵 최고!","따끈따끈 좋아요~","완전 맛있어 보여요!"],
+    busy:["빨리 줘서 고마워요!","덕분에 안 늦겠다!"],
+    chill:["느긋하게 잘 먹을게요~","향이 참 좋네요"],
+    big:["잘 먹겠습니다! 냠냠","한 봉지 든든하네요~"],
+    vip:["역시 이 집이야!","소문 좀 내야겠어요","최고의 붕어빵!"],
+    thug:["흥, 봐줄 만하네","이 정도면 됐어","다음엔 더 빨리 줘"],
+  },
+  angry:["너무 오래 걸려요!","에잇, 그냥 갈래!","다신 안 와!","불친절하네요…"],
+};
+function custLine(pid,happy){
+  if(!happy){ const a=CUST_LINES.angry; return a[ri(0,a.length-1)]; }
+  const a=CUST_LINES.happy[pid]||CUST_LINES.happy.normal; return a[ri(0,a.length-1)];
+}
+function sayLine(c,happy){
+  if(!c.bubbleOrders)return;
+  c.bubbleOrders.innerHTML='<div class="say'+(happy?'':' bad')+'">'+custLine(c.persId,happy)+'</div>';
+  const pb=c.el.querySelector(".patience"); if(pb)pb.style.display="none";
+}
 function renderOrder(c){
   let html="";
   for(const k in c.order){
     const left=c.remaining[k]||0, tot=c.order[k];
     const cls=left===0?"order-line done-part":"order-line";
-    html+='<div class="'+cls+'">'+fishIcon(k)+'<b class="cnt">×'+(left>0?left:tot)+'</b></div>';
+    html+='<div class="'+cls+'">'+fishIcon(k)+'<span class="nmlabel">'+FILLINGS[k].name+'</span><b class="cnt">×'+(left>0?left:tot)+'</b></div>';
   }
   c.bubbleOrders.innerHTML=html;
 }
@@ -1582,6 +1633,7 @@ function serveCustomer(c){
     c.el.classList.add("happyPop");
     const mouth=c.el.querySelector(".mouth");
     if(mouth)mouth.setAttribute("d",MOUTH_HAPPY);
+    sayLine(c,true);
     leaveCustomer(c,true);
   }
 }
@@ -1592,6 +1644,7 @@ function leaveCustomer(c,happy){
     day.lost++;
     const mouth=c.el.querySelector(".mouth");
     if(mouth)mouth.setAttribute("d",MOUTH_SAD);
+    sayLine(c,false);
     resetCombo();
     SFX.angry();
     if(G.rep<=1.0){ updateHUD(); customers=customers.filter(x=>x!==c); c.el.classList.add("leave"); gameOver(); return; }
@@ -1601,7 +1654,7 @@ function leaveCustomer(c,happy){
   setTimeout(()=>{
     c.el.classList.add("leave");
     setTimeout(()=>{c.el.remove()},400);
-  },happy?420:80);
+  },happy?950:850);   // 대사 읽을 시간 확보
   customers=customers.filter(x=>x!==c);
 }
 function gameOver(){
@@ -1632,8 +1685,10 @@ function updateCustomers(dt){
     c.t+=dt;
     if(thugPresent&&c.persId!=="thug")c.t+=dt*0.5;   // 방해 오라 +50% 소모
     const r=clamp(1-c.t/c.max,0,1);
-    c.pbar.style.width=(r*100)+"%";
-    c.pbar.style.background=r>.5?"var(--ok)":(r>.25?"#f5a83c":"var(--bad)");
+    const pct=Math.round(r*100);
+    if(c.ppct!==pct){ c.ppct=pct; c.pbar.style.width=pct+"%"; }
+    const band=r>.5?0:(r>.25?1:2);
+    if(c.pband!==band){ c.pband=band; c.pbar.style.background=band===0?"var(--ok)":(band===1?"#f5a83c":"var(--bad)"); }
     if(c.t>=c.max)leaveCustomer(c,false);
   }
 }
@@ -1716,7 +1771,7 @@ function loop(t){
     if(day.time>=DAY_LENGTH){ day.closing=true; toast("영업 마감! 남은 손님까지만 받아요"); }
   }
   for(const m of molds)updateMold(m,dt);
-  setSizzle(molds.reduce((a,m)=>a+((m.state==="cookA"||m.state==="cookB")?1:0),0));
+  if(SND.sizzle)setSizzle(molds.reduce((a,m)=>a+((m.state==="cookA"||m.state==="cookB")?1:0),0));
   updateCustomers(dt);
 
   if(day.closing&&customers.length===0){
