@@ -165,8 +165,8 @@ body{
 
 /* ---------- 손님 거리 ---------- */
 #street{
-  z-index:2;position:relative;flex:0 0 auto;height:158px;display:flex;align-items:flex-end;
-  justify-content:center;gap:8px;padding:0 10px 4px;
+  z-index:2;position:relative;flex:0 0 auto;height:182px;display:flex;align-items:flex-end;
+  justify-content:center;gap:6px;padding:0 8px 4px;
 }
 #street .city{position:absolute;left:0;right:0;bottom:22px;height:230px;pointer-events:none;z-index:0}
 #street::before{content:"";position:absolute;left:0;right:0;bottom:0;height:28px;z-index:1;
@@ -175,13 +175,13 @@ body{
     linear-gradient(180deg,#efe4d2,#e3d2b8);
   border-top:3px solid #fff}
 .customer{
-  position:relative;width:98px;display:flex;flex-direction:column;align-items:center;
+  position:relative;width:112px;display:flex;flex-direction:column;align-items:center;
   transition:transform .35s cubic-bezier(.34,1.56,.64,1),opacity .3s;cursor:pointer;z-index:2;
 }
 .customer.enter{animation:walkIn .5s cubic-bezier(.34,1.4,.64,1)}
 @keyframes walkIn{from{transform:translateX(150px);opacity:0}to{transform:translateX(0);opacity:1}}
 .customer.leave{transform:translateX(-170px)!important;opacity:0}
-.customer.happyPop svg.body{animation:hop .45s ease}
+.customer.happyPop svg.body,.customer.happyPop img.body{animation:hop .45s ease}
 @keyframes hop{30%{transform:translateY(-14px)}60%{transform:translateY(0)}80%{transform:translateY(-6px)}}
 .bubble{
   background:#fff;border:3px solid #ffcf8a;border-radius:16px;padding:5px 8px 4px;margin-bottom:5px;min-width:78px;
@@ -194,7 +194,8 @@ body{
 .bubble .order-line .done-part{opacity:.3;text-decoration:line-through}
 .patience{height:6px;border-radius:4px;background:#f0e4d0;margin-top:4px;overflow:hidden;border:1px solid #e5d2b5}
 .patience i{display:block;height:100%;border-radius:4px;background:var(--ok);transition:width .3s linear}
-.customer svg.body,.customer img.body{width:80px;height:auto;filter:drop-shadow(0 5px 6px rgba(120,60,10,.3))}
+.customer svg.body{width:88px;height:auto;filter:drop-shadow(0 5px 6px rgba(120,60,10,.3))}
+.customer img.body{width:104px;height:auto;filter:drop-shadow(0 6px 7px rgba(120,60,10,.32))}
 .cityimg{width:100%;height:100%;object-fit:cover;object-position:bottom}
 
 /* ---------- 화덕(굽는 판) ---------- */
@@ -225,7 +226,7 @@ body{
 }
 .mold svg.fish{width:90%;height:auto;overflow:visible}
 .mold .fish-wrap{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;transition:transform .28s}
-.fimg{position:absolute;left:5%;top:8%;width:90%;height:84%;object-fit:contain;transition:opacity .25s}
+.fimg{position:absolute;left:3%;top:5%;width:94%;height:90%;object-fit:contain;transition:opacity .2s}
 .mold.flipping .fish-wrap{animation:flipAnim .32s ease}
 @keyframes flipAnim{50%{transform:scaleY(.15) translateY(-6px)}}
 .mold .ring{position:absolute;inset:4px;border-radius:12px;pointer-events:none;opacity:0;transition:opacity .2s}
@@ -242,10 +243,16 @@ body{
 @keyframes tagBounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-4px)}}
 .mold.attn .tag,.mold.burnt-attn .tag{opacity:1}
 .mold.burnt-attn .tag{background:#f66d5c;border-color:#ffb3a8;color:#fff}
-.mold .fillDot{
-  position:absolute;bottom:5px;right:6px;width:15px;height:15px;border-radius:50%;
-  border:2.5px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.45);opacity:0;
+.mold .fillCut{
+  position:absolute;left:34%;top:38%;width:34%;height:31%;
+  border-radius:52% 48% 52% 48%;border:2.5px solid rgba(255,240,205,.96);
+  box-shadow:0 1px 3px rgba(80,40,10,.5),inset 0 2px 5px rgba(0,0,0,.4),inset 0 -1px 2px rgba(255,255,255,.3);
+  transform:rotate(-7deg) scale(.4);opacity:0;z-index:2;pointer-events:none;
+  transition:opacity .16s,transform .3s cubic-bezier(.34,1.75,.6,1);
+  background-size:cover;
 }
+.mold.filled .fillCut{opacity:1;transform:rotate(-7deg) scale(1)}
+.mold.burnt-attn .fillCut{filter:brightness(.55) saturate(.6);border-color:rgba(120,90,60,.85)}
 .mold .steam{position:absolute;top:-4px;left:0;right:0;height:20px;pointer-events:none;opacity:0}
 .mold.steaming .steam{opacity:1}
 .steam i{position:absolute;bottom:0;width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.7);
@@ -404,7 +411,7 @@ body{
 .ksteam i:nth-child(1){left:22%}
 .ksteam i:nth-child(2){left:55%;animation-delay:.7s}
 .customer::before{content:"";position:absolute;bottom:1px;left:50%;transform:translateX(-50%);
-  width:58px;height:11px;border-radius:50%;background:rgba(90,60,30,.18)}
+  width:74px;height:10px;border-radius:50%;background:rgba(90,60,30,.13);filter:blur(1px)}
 #gameScreen::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:9;
   box-shadow:inset 0 0 70px rgba(140,80,30,.13)}
 
@@ -422,6 +429,25 @@ body{
 @keyframes gearSpin{to{transform:rotate(360deg)}}
 .rush .bulb{animation-duration:.9s}
 .rush #gameScreen::after{box-shadow:inset 0 0 70px rgba(246,109,92,.3)}
+
+/* ---------- 재료 붕어빵 아이콘 (주문/쟁반/재료버튼 공용) ---------- */
+.ficon{position:relative;display:inline-block;width:34px;height:22px;vertical-align:middle;line-height:0}
+.ficon img{width:100%;height:100%;object-fit:contain;display:block}
+.ficon .cut{position:absolute;left:37%;top:33%;width:37%;height:42%;border-radius:52% 48% 52% 48%;
+  border:1.5px solid rgba(255,241,208,.95);box-shadow:0 1px 2px rgba(90,50,10,.4),inset 0 1px 2px rgba(0,0,0,.3);
+  background-size:cover;transform:rotate(-7deg)}
+.bubble .order-line .ficon{width:30px;height:20px}
+.tray-item .ficon{width:34px;height:22px}
+.fill-btn .ficon{width:40px;height:26px;margin-bottom:1px}
+
+/* ---------- 드래그 서비스 ---------- */
+.dragGhost{position:fixed;width:66px;height:44px;transform:translate(-50%,-60%);pointer-events:none;z-index:40;
+  filter:drop-shadow(0 8px 10px rgba(120,60,10,.4));opacity:.95}
+.dragGhost img{width:100%;height:100%;object-fit:contain}
+.dragGhost svg{width:100%;height:100%}
+.customer.drop-hint{outline:3px dashed rgba(255,180,80,.9);outline-offset:3px;border-radius:20px}
+.customer.drop-on{outline:4px solid #6dc46b;transform:translateY(-6px) scale(1.04)}
+.mold.grabbing{cursor:grabbing}
 
 /* ---------- 토스트/플로팅 ---------- */
 #toast{
@@ -549,12 +575,33 @@ function noise(dur,vol){
   f.type="highpass"; f.frequency.value=1200;
   g.gain.value=vol||.12; s.buffer=buf; s.connect(f).connect(g).connect(ctx.destination); s.start();
 }
+/* ---------- 사용자 교체용 사운드 파일 훅 ----------
+   assets/ 폴더에 아래 오디오 파일이 있으면 합성음 대신 사용합니다(없으면 기존 합성음).
+   pour.mp3(반죽 붓기) flip.mp3(뒤집기) collect.mp3(꺼내기) sell.mp3(판매) burnt.mp3(태움) sizzle.mp3(지글지글·반복)  */
+const SND={pour:null,flip:null,collect:null,sell:null,burnt:null,sizzle:null};
+(function loadSounds(){
+  if(typeof Audio==="undefined")return;
+  const dir="assets/";
+  const ld=(name,key,loop)=>{
+    const a=new Audio();
+    a.addEventListener("canplaythrough",()=>{ if(loop)a.loop=true; SND[key]=a; },{once:true});
+    a.addEventListener("error",()=>{});
+    a.preload="auto"; a.src=dir+name;
+  };
+  ld("pour.mp3","pour"); ld("flip.mp3","flip"); ld("collect.mp3","collect");
+  ld("sell.mp3","sell"); ld("burnt.mp3","burnt"); ld("sizzle.mp3","sizzle",true);
+})();
+function playSnd(key){
+  const a=SND[key]; if(!a||muted)return false;
+  try{ const n=a.cloneNode(); n.volume=a.volume; n.play().catch(()=>{}); }catch(e){}
+  return true;
+}
 const SFX={
-  pour(){ tone(220,.15,"triangle",.12); noise(.25,.06); },
-  flip(){ noise(.18,.14); tone(500,.08,"square",.05,.02); },
-  collect(){ tone(660,.1,"sine",.14); tone(880,.14,"sine",.12,.08); },
-  sell(){ tone(523,.09,"square",.08); tone(659,.09,"square",.08,.07); tone(784,.09,"square",.08,.14); tone(1047,.2,"square",.09,.21); },
-  burnt(){ tone(140,.35,"sawtooth",.12); },
+  pour(){ if(playSnd("pour"))return; tone(220,.15,"triangle",.12); noise(.25,.06); },
+  flip(){ if(playSnd("flip"))return; noise(.18,.14); tone(500,.08,"square",.05,.02); },
+  collect(){ if(playSnd("collect"))return; tone(660,.1,"sine",.14); tone(880,.14,"sine",.12,.08); },
+  sell(){ if(playSnd("sell"))return; tone(523,.09,"square",.08); tone(659,.09,"square",.08,.07); tone(784,.09,"square",.08,.14); tone(1047,.2,"square",.09,.21); },
+  burnt(){ if(playSnd("burnt"))return; tone(140,.35,"sawtooth",.12); },
   arrive(){ tone(880,.07,"sine",.1); tone(1175,.1,"sine",.08,.06); },
   angry(){ tone(330,.14,"sawtooth",.09); tone(233,.22,"sawtooth",.1,.1); },
   buy(){ tone(587,.08,"triangle",.12); tone(880,.16,"triangle",.12,.07); },
@@ -637,6 +684,13 @@ function ensureSizzle(){
   sizz={g};
 }
 function setSizzle(n){
+  // 사용자 sizzle.mp3 가 있으면 그것으로 대체
+  if(SND.sizzle){
+    const a=SND.sizzle;
+    if(muted||n<=0){ if(!a.paused)a.pause(); }
+    else{ a.volume=Math.min(.6,n*.14); if(a.paused)a.play().catch(()=>{}); }
+    return;
+  }
   if(!AC)return;
   if(n>0&&!muted)ensureSizzle();
   if(!sizz)return;
@@ -660,7 +714,7 @@ const UPGRADES={
   pack: {name:"예쁜 포장", desc:"팁 확률과 금액↑",costs:[4000,10000,20000]},
 };
 
-const DAY_LENGTH=90;           // 초
+const DAY_LENGTH=60;           // 초 (한 라운드 길이)
 const MOLD_COUNTS=[6,9,12];    // 업그레이드 단계별 틀 수
 const GRID_COLS=[3,3,4];
 
@@ -691,7 +745,7 @@ function load(){ try{const s=localStorage.getItem("bbt_save"); return s?JSON.par
    fish_raw.png, fish_gold.png, fish_burnt.png (3개 모두 있어야 적용)
    customer_1.png ~ customer_8.png (있는 만큼 랜덤 사용)
    city_bg.png (거리 배경)                                   */
-const IMG={fish:false,fishRaw:"",fishGold:"",fishBurnt:"",customers:[],city:""};
+const IMG={fish:false,fishRaw:"",fishGold:"",fishBurnt:"",customers:[],city:"",fillFish:{},fillTex:{}};
 (function loadAssets(){
   if(typeof Image==="undefined")return;
   const dir="assets/";
@@ -700,21 +754,37 @@ const IMG={fish:false,fishRaw:"",fishGold:"",fishBurnt:"",customers:[],city:""};
     if(a&&b&&c){IMG.fishRaw=a;IMG.fishGold=b;IMG.fishBurnt=c;IMG.fish=true;}
   })));
   for(let i=1;i<=8;i++)t("customer_"+i+".png",s=>{if(s)IMG.customers.push(s)});
+  // (선택) 재료별 붕어빵 아이콘(작은 통짜 그림): assets/fish_red.png, fish_cream.png, fish_choco.png, fish_pizza.png
+  ["red","cream","choco","pizza"].forEach(k=>t("fish_"+k+".png",s=>{if(s)IMG.fillFish[k]=s;}));
+  // (선택) 재료별 "속(단면) 질감" 이미지: assets/fill_red.png, fill_cream.png, fill_choco.png, fill_pizza.png
+  ["red","cream","choco","pizza"].forEach(k=>t("fill_"+k+".png",s=>{if(s)IMG.fillTex[k]=s;}));
   t("city_bg.png",s=>{
     if(s){IMG.city=s;
       document.querySelectorAll("#street .city, #titleCity").forEach(el=>{el.innerHTML='<img class="cityimg" src="'+s+'">'});}
   });
 })();
 function fishImgStack(){
-  return '<img class="fimg" src="'+IMG.fishRaw+'" alt="">'+
+  return '<img class="fimg raw" src="'+IMG.fishRaw+'" alt="">'+
          '<img class="fimg gold" src="'+IMG.fishGold+'" style="opacity:0" alt="">'+
          '<img class="fimg burnt" src="'+IMG.fishBurnt+'" style="opacity:0" alt="">';
 }
+/* 주문/쟁반/재료버튼용 작은 붕어빵 아이콘 — 실제 이미지가 있으면 이미지 사용 */
+function fishIcon(key){
+  const f=FILLINGS[key];
+  if(IMG.fillFish[key]) return '<span class="ficon"><img src="'+IMG.fillFish[key]+'" alt=""></span>';
+  if(IMG.fish) return '<span class="ficon"><img src="'+IMG.fishGold+'" alt=""><i class="cut" style="background:'+fillPaint(key)+'"></i></span>';
+  return miniFish(f.color);
+}
 function paintFish(m,color,goldT,burnT){
+  // 한 틀에 붕어빵 1마리만 — 겹침 없이 단계별로 한 장만 표시
   if(IMG.fish&&m.imgGold){
-    m.imgGold.style.opacity=clamp(goldT,0,1);
-    m.imgBurnt.style.opacity=clamp(burnT,0,1);
-  }else setFishColor(m,color);
+    const show = burnT>=.5?"burnt":(goldT>=.5?"gold":"raw");
+    if(m.imgRaw)m.imgRaw.style.opacity = show==="raw"?1:0;
+    m.imgGold.style.opacity = show==="gold"?1:0;
+    m.imgBurnt.style.opacity = show==="burnt"?1:0;
+    return;
+  }
+  setFishColor(m,color);
 }
 
 /* ---------- 성장/콤보/피버 시스템 ---------- */
@@ -1075,24 +1145,53 @@ function buildGrill(){
       '<div class="ring"></div>'+
       '<div class="tag"></div>'+
       '<div class="fish-wrap"></div>'+
-      '<div class="fillDot"></div>'+
+      '<div class="fillCut"></div>'+
       '<div class="steam"><i></i><i></i><i></i></div>'+
       '<div class="smoke"><i></i><i></i><i></i></div>'+
       '<div class="prog"><i></i></div>';
     g.appendChild(el);
     const m={el,state:"empty",t:0,fill:null,
       wrap:el.querySelector(".fish-wrap"),tag:el.querySelector(".tag"),
-      dot:el.querySelector(".fillDot"),bar:el.querySelector(".prog i")};
+      cut:el.querySelector(".fillCut"),bar:el.querySelector(".prog i")};
     molds.push(m);
-    el.addEventListener("pointerdown",e=>{e.preventDefault();tapMold(m)});
+    attachMold(m);
     renderMoldEmpty(m);
   }
 }
 function renderMoldEmpty(m){
   m.wrap.innerHTML=fishSVG("rgba(255,255,255,.05)","fish",false);
-  m.dot.style.opacity=0;
   m.el.className="mold";
   m.tag.textContent="";
+}
+/* 속(팥/슈크림 등) 단면 질감 — 아이콘·화덕 공용
+   assets/fill_<맛>.png 가 있으면 그 이미지를 속으로 사용, 없으면 아래 CSS 질감 */
+function fillPaint(key){
+  if(IMG.fillTex[key]) return "center/80% no-repeat url("+IMG.fillTex[key]+"), "+cssFill(key);
+  return cssFill(key);
+}
+function cssFill(key){
+  switch(key){
+    case "red": // 팥: 팥알갱이
+      return "radial-gradient(circle at 30% 32%, rgba(120,40,58,.9) 7%, transparent 9%),"
+           +"radial-gradient(circle at 62% 52%, rgba(120,40,58,.85) 6%, transparent 8%),"
+           +"radial-gradient(circle at 44% 74%, rgba(120,40,58,.8) 6%, transparent 8%),"
+           +"radial-gradient(circle at 74% 30%, rgba(120,40,58,.8) 5%, transparent 7%),"
+           +"linear-gradient(160deg,#c1546a,#9c3a4d)";
+    case "cream": // 슈크림: 노란 바탕 + 흰 점
+      return "radial-gradient(circle at 26% 34%, #fffdf0 14%, transparent 16%),"
+           +"radial-gradient(circle at 58% 24%, #fffdf0 11%, transparent 13%),"
+           +"radial-gradient(circle at 44% 66%, #fffdf0 12%, transparent 14%),"
+           +"radial-gradient(circle at 76% 58%, #fffdf0 10%, transparent 12%),"
+           +"linear-gradient(160deg,#f7d366,#ecbb3c)";
+    case "choco":
+      return "radial-gradient(circle at 34% 30%, rgba(255,255,255,.16) 9%, transparent 11%),"
+           +"linear-gradient(160deg,#7c4c2b,#553119)";
+    case "pizza":
+      return "radial-gradient(circle at 30% 34%, #ffd98a 9%, transparent 11%),"
+           +"radial-gradient(circle at 64% 60%, #b83c2a 8%, transparent 10%),"
+           +"linear-gradient(160deg,#ef6a4e,#d84a30)";
+    default: return (FILLINGS[key]?FILLINGS[key].color:"#ccc");
+  }
 }
 function setFishColor(m,color){
   const b=m.wrap.querySelector(".fbody");
@@ -1102,9 +1201,12 @@ const COL_RAW="#f8ead0", COL_GOLD="#e8a53f", COL_DARK="#8a5424", COL_BURNT="#3a2
 
 function fillMold(m){
   m.filled=true;
-  m.dot.style.opacity=1;
+  m.cut.style.background=fillPaint(m.fill);
   m.el.classList.remove("fill-attn");
+  m.el.classList.add("filled");
   m.tag.textContent="";
+  sparkAt(m.el);
+  floatText(m.el,(FILLINGS[m.fill]?FILLINGS[m.fill].name:"속")+" 속!",false);
   SFX.plop(); vibrate(8);
   addFever(1);
 }
@@ -1117,9 +1219,8 @@ function tapMold(m){
     if(G.money<f.cost){toast("돈이 부족해요!");SFX.angry();return}
     G.money-=f.cost; day.cost+=f.cost;
     m.state="cookA"; m.t=0; m.fill=selFill; m.filled=false;
-    if(IMG.fish){ m.wrap.innerHTML=fishImgStack(); m.imgGold=m.wrap.querySelector(".gold"); m.imgBurnt=m.wrap.querySelector(".burnt"); }
-    else { m.wrap.innerHTML=fishSVG(COL_RAW); m.imgGold=null; }
-    m.dot.style.background=f.color; m.dot.style.opacity=0;
+    if(IMG.fish){ m.wrap.innerHTML=fishImgStack(); m.imgRaw=m.wrap.querySelector(".raw"); m.imgGold=m.wrap.querySelector(".gold"); m.imgBurnt=m.wrap.querySelector(".burnt"); }
+    else { m.wrap.innerHTML=fishSVG(COL_RAW); m.imgRaw=null; m.imgGold=null; }
     m.el.classList.add("cooking","steaming","fill-attn");
     m.tag.textContent="속 넣기!";
     SFX.pour(); vibrate(12);
@@ -1157,6 +1258,90 @@ function tapMold(m){
     toast("탄 붕어빵을 버렸어요…");
     SFX.burnt(); vibrate([20,40,20]);
   }
+}
+
+/* ---------- 틀 조작: 탭 vs 드래그(서비스) ---------- */
+function attachMold(m){
+  m.el.addEventListener("pointerdown",e=>{
+    e.preventDefault();
+    if(!running)return;
+    const sx=e.clientX, sy=e.clientY;
+    const canDrag=(m.state==="done"||m.state==="burnt");
+    let dragging=false, ghost=null;
+    const move=ev=>{
+      const dx=ev.clientX-sx, dy=ev.clientY-sy;
+      if(!dragging){
+        if(canDrag && Math.abs(dx)+Math.abs(dy)>12){
+          dragging=true;
+          m.el.classList.add("grabbing");
+          ghost=makeGhost(m);
+          document.querySelectorAll(".customer").forEach(c=>{if(!c.classList.contains("leave"))c.classList.add("drop-hint")});
+        } else return;
+      }
+      ghost.style.left=ev.clientX+"px"; ghost.style.top=ev.clientY+"px";
+      const hit=customerAt(ev.clientX,ev.clientY);
+      document.querySelectorAll(".customer.drop-on").forEach(c=>c.classList.remove("drop-on"));
+      if(hit)hit.el.classList.add("drop-on");
+    };
+    const up=ev=>{
+      document.removeEventListener("pointermove",move);
+      document.removeEventListener("pointerup",up);
+      m.el.classList.remove("grabbing");
+      document.querySelectorAll(".customer").forEach(c=>c.classList.remove("drop-hint","drop-on"));
+      if(ghost)ghost.remove();
+      if(dragging){
+        const c=customerAt(ev.clientX,ev.clientY);
+        if(c)serviceCustomer(m,c); else discardMold(m);
+      }else{
+        tapMold(m);
+      }
+    };
+    document.addEventListener("pointermove",move,{passive:false});
+    document.addEventListener("pointerup",up);
+  });
+}
+function makeGhost(m){
+  const g=document.createElement("div"); g.className="dragGhost";
+  if(IMG.fish){
+    const src=m.state==="burnt"?IMG.fishBurnt:(IMG.fillFish[m.fill]||IMG.fishGold);
+    g.innerHTML='<img src="'+src+'" alt="">';
+  }else{
+    g.innerHTML=miniFish(m.state==="burnt"?"#3a2a1e":(FILLINGS[m.fill]?FILLINGS[m.fill].color:"#e8a53f"));
+  }
+  $("#app").appendChild(g);
+  return g;
+}
+function customerAt(x,y){
+  let el=document.elementFromPoint(x,y);
+  while(el&&!(el.classList&&el.classList.contains("customer")))el=el.parentElement;
+  if(!el)return null;
+  return customers.find(c=>c.el===el&&!c.leaving)||null;
+}
+function serviceCustomer(m,c){
+  if(m.state==="done"){
+    // 잘 익은 붕어빵 서비스 → 팁
+    let tip=Math.round((120+G.upg.pack*80+(G.rep-3)*40)*(day.feverOn?2:1)/10)*10;
+    tip=Math.max(60,tip);
+    G.money+=tip; day.tips+=tip; day.service=(day.service||0)+1;
+    G.rep=clamp(G.rep+0.05,1,5);
+    addCombo(); addFever(8); addXP(6);
+    floatText(c.el,"서비스! 팁 +"+tip,false);
+    c.el.classList.add("happyPop");
+    const mo=c.el.querySelector(".mouth"); if(mo)mo.setAttribute("d",MOUTH_HAPPY);
+    SFX.sell(); vibrate(16); checkGoal(); checkAch();
+  }else if(m.state==="burnt"){
+    // 탄 붕어빵 서비스 → 평판 소폭 회복 (팁 없음)
+    G.rep=clamp(G.rep+0.03,1,5); day.service=(day.service||0)+1;
+    floatText(c.el,"서비스 ♡",false);
+    toast("탄 붕어빵을 서비스로 드렸어요");
+    SFX.collect(); vibrate(10);
+  }else return;
+  m.state="empty"; renderMoldEmpty(m); updateHUD();
+}
+function discardMold(m){
+  if(m.state==="burnt"){ toast("탄 붕어빵을 버렸어요…"); SFX.burnt(); vibrate([20,40,20]); }
+  else{ toast("붕어빵을 버렸어요"); SFX.plop(); }
+  m.state="empty"; renderMoldEmpty(m);
 }
 
 function updateMold(m,dt){
@@ -1222,7 +1407,7 @@ function renderTray(bumpKey){
     const n=day.tray[k]||0;
     if(n>0){
       any=true;
-      html+='<div class="tray-item" data-k="'+k+'">'+miniFish(FILLINGS[k].color)+'× '+n+'</div>';
+      html+='<div class="tray-item" data-k="'+k+'">'+fishIcon(k)+'× '+n+'</div>';
     }
   }
   t.innerHTML=any?html:'<span class="tray-empty">완성된 붕어빵이 여기 담겨요</span>';
@@ -1240,7 +1425,7 @@ function renderFillingBar(){
     const f=FILLINGS[k];
     const b=document.createElement("button");
     b.className="fill-btn"+(k===selFill?" sel":"")+(G.unlocked[k]?"":" locked");
-    b.innerHTML='<span class="dot" style="background:'+f.color+'"></span>'+
+    b.innerHTML=fishIcon(k)+
       '<span class="nm">'+f.name+'</span><span class="pr">'+f.price.toLocaleString()+'원</span>';
     b.addEventListener("pointerdown",e=>{
       e.preventDefault();
@@ -1260,17 +1445,23 @@ const PERSONA={
   vip:{name:"VIP",color:"#a97ad9",pat:.7,pay:1.6},
 };
 function pickPersona(){
+  const d=G.day;
+  // 초반엔 까다로운 손님(바빠요/VIP·재촉)을 줄이고 느긋한 손님을 늘림
+  const busy = d<3?6:(d<6?12:18);
+  const vip  = d<2?2:(d<5?5:8);
+  const big  = d<2?6:10;
+  const chill= d<3?22:14;
   let r=Math.random()*100;
-  for(const q of [["busy",18],["chill",14],["big",10],["vip",8]]){ if((r-=q[1])<=0)return q[0]; }
+  for(const q of [["busy",busy],["chill",chill],["big",big],["vip",vip]]){ if((r-=q[1])<=0)return q[0]; }
   return "normal";
 }
 
 /* ---------- 손님 ---------- */
-function maxQueue(){ return 3+((day&&day.rushT>0)?1:0); }
-function patienceTime(){ return 26+G.upg.word*3; }
+function maxQueue(){ return (G.day<3?2:3)+((day&&day.rushT>0)?1:0); }
+function patienceTime(){ return Math.max(16, 36-(G.day-1)*1.5)+G.upg.word*3; }   // 초반 넉넉 → 점점 짧게
 function spawnInterval(){
-  const base=Math.max(2.6, 7.5-G.upg.word*0.8-(G.day-1)*0.18);
-  return rnd(base*.7,base*1.3);
+  const base=Math.max(2.4, 9.5-G.upg.word*0.7-(G.day-1)*0.55);   // 초반 느긋 → 점점 빠르게
+  return rnd(base*.75,base*1.25);
 }
 function makeOrder(big){
   const unlockedKeys=FILL_KEYS.filter(k=>G.unlocked[k]);
@@ -1313,7 +1504,7 @@ function renderOrder(c){
   for(const k in c.order){
     const left=c.remaining[k]||0, tot=c.order[k];
     const cls=left===0?"order-line done-part":"order-line";
-    html+='<div class="'+cls+'">'+miniFish(FILLINGS[k].color)+'× '+(left>0?left:tot)+'</div>';
+    html+='<div class="'+cls+'">'+fishIcon(k)+'× '+(left>0?left:tot)+'</div>';
   }
   c.bubbleOrders.innerHTML=html;
 }
@@ -1424,7 +1615,16 @@ function floatText(anchor,txt,neg){
 
 /* ---------- 하루 진행 ---------- */
 function startDay(){
-  day={time:0,revenue:0,cost:0,tips:0,served:0,lost:0,happy:0,burnt:0,
+  // 파산/과소비 방지 — 붕어틀을 한 판 채울 최소 운영 자금은 보장
+  const moldCount=MOLD_COUNTS[G.upg.molds]||MOLD_COUNTS[0];
+  const minReserve=FILLINGS.red.cost*moldCount;
+  if(G.money<minReserve){
+    const aid=minReserve-G.money;
+    G.money=minReserve;
+    toast("운영 자금이 부족해 비상 지원금 +"+aid.toLocaleString()+"원을 받았어요");
+    save();
+  }
+  day={time:0,revenue:0,cost:0,tips:0,served:0,lost:0,happy:0,burnt:0,service:0,
     tray:{},spawnT:1.2,closing:false,
     goal:dayGoal(),goalHit:false,combo:0,bestCombo:0,fever:0,feverOn:false,feverT:0};
   customers.forEach(c=>c.el.remove()); customers=[];
@@ -1435,6 +1635,8 @@ function startDay(){
   running=true; lastT=performance.now();
   toast(G.day+"일차 장사 시작! — "+titleFor(G.level));
   requestAnimationFrame(loop);
+  if(!G.hintService){ G.hintService=1; save();
+    setTimeout(()=>{ if(running)toast("완성·탄 붕어빵을 손님에게 끌어다 놓으면 '서비스' 🎁"); },5000); }
 }
 function loop(t){
   if(!running)return;
@@ -1473,16 +1675,8 @@ function endDay(){
   const isRecord=profit>G.bestProfit&&profit>0;
   if(isRecord)G.bestProfit=profit;
   if(day.goalHit)G.goalStreak++; else G.goalStreak=0;
-  G.history.push(profit); if(G.history.length>14)G.history.shift();
   addXP(20+(day.goalHit?10:0));
   checkAch();
-  const maxP=Math.max.apply(null,G.history.map(v=>Math.abs(v)).concat([1]));
-  let bars="";
-  G.history.forEach((v,i)=>{
-    const h=Math.max(4,Math.round(Math.abs(v)/maxP*60));
-    const cls=(i===G.history.length-1?"cur":"")+(v===G.bestProfit&&v>0?" rec":"");
-    bars+='<i class="'+cls+'" style="height:'+h+'px"></i>';
-  });
   showModal(
     '<h2>'+G.day+'일차 마감</h2><div class="msub">오늘 하루도 수고했어요!</div>'+
     '<table class="summary-table">'+
@@ -1491,11 +1685,10 @@ function endDay(){
     '<tr><td>재료비</td><td style="color:#e0564a">-'+fmt(day.cost).slice(2)+'원</td></tr>'+
     '<tr class="total"><td>순이익</td><td>'+(profit>=0?"+":"")+fmt(profit)+(isRecord?' <span style="color:#4db06b">신기록!</span>':'')+'</td></tr>'+
     '</table>'+
-    '<div class="chart">'+bars+'</div>'+
-    '<div class="chart-cap">일별 순이익 추이 (최근 '+G.history.length+'일)'+(isRecord?' — 역대 최고 기록 경신!':'')+'</div>'+
     '<table class="summary-table">'+
     '<tr><td>판매한 붕어빵</td><td>'+day.served+'개</td></tr>'+
     '<tr><td>행복한 손님</td><td>'+day.happy+'명</td></tr>'+
+    '<tr><td>서비스 제공</td><td>'+(day.service||0)+'개</td></tr>'+
     '<tr><td>놓친 손님</td><td>'+day.lost+'명</td></tr>'+
     '<tr><td>태운 붕어빵</td><td>'+day.burnt+'개</td></tr>'+
     '<tr><td>최고 콤보</td><td>x'+day.bestCombo+'</td></tr>'+
